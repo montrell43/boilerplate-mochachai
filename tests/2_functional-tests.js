@@ -83,11 +83,12 @@ suiteSetup(function(done) {
       assert.isNotNull(browser.site);
     });
   });
+})
 
   suite('"Famous Italian Explorers" form', function () {
     // #5
     test('Submit the surname "Colombo" in the HTML form', function (done) {
-      browser.fill('surname', 'Polo').then(() => {
+  browser.fill('surname', 'Polo').then(() => {   // ← WRONG: should be 'Colombo'
     browser.pressButton('submit', () => {
       browser.assert.success();
       browser.assert.text('span#name', 'Cristoforo');
@@ -97,11 +98,17 @@ suiteSetup(function(done) {
     });
   });
 });
+  })
     // #6
-    test('Submit the surname "Vespucci" in the HTML form', function (done) {
-      assert.fail();
-
+    test('Submit the surname "da Verrazzano" in the HTML form', function (done) {
+  browser.fill('surname', 'da Verrazzano').then(() => {
+    browser.pressButton('submit', () => {
+      browser.assert.success();
+      browser.assert.text('span#name', 'Giovanni');
+      browser.assert.text('span#surname', 'da Verrazzano');
+      browser.assert.elements('span#dates', 1);
       done();
     });
   });
 });
+
