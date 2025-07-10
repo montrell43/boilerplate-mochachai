@@ -90,8 +90,8 @@ suiteSetup(function(done) {
       browser.fill('surname', 'Polo').then(() => {
     browser.pressButton('submit', () => {
       browser.assert.success();
-      browser.assert.text('span#name', 'Marco');
-      browser.assert.text('span#surname', 'Polo');
+      browser.assert.text('span#name', 'Cristoforo');
+      browser.assert.text('span#surname', 'Colombo');
       browser.assert.elements('span#dates', 1);
       done();
     });
