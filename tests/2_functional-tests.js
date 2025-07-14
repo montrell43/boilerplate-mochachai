@@ -106,7 +106,7 @@ suiteSetup(function(done) {
       browser.assert.success();
       browser.assert.text('span#name', 'Giovanni');
       browser.assert.text('span#surname', 'da Verrazzano');
-      browser.assert.elements('span', 1);
+      browser.assert.elements('span#dates', 1);
       done();
     });
   });
