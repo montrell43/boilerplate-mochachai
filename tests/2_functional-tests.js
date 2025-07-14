@@ -88,11 +88,11 @@ suiteSetup(function(done) {
   suite('"Famous Italian Explorers" form', function () {
     // #5
     test('Submit the surname "Colombo" in the HTML form', function (done) {
-  browser.fill('surname', 'Colombo').then(() => {   // ← WRONG: should be 'Colombo'
+  browser.fill('surname', 'Polo').then(() => {   // ← WRONG: should be 'Colombo'
     browser.pressButton('submit', () => {
       browser.assert.success();
-      browser.assert.text('span#name', 'Cristoforo');
-      browser.assert.text('span#surname', 'Colombo');
+      browser.assert.text('span#name', 'Marco');
+      browser.assert.text('span#surname', 'Polo');
       browser.assert.elements('span#dates', 1);
       done();
     });
