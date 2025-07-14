@@ -68,46 +68,53 @@ suite('Functional Tests', function () {
 });
 
 const Browser = require('zombie');
-Browser.site = 'https://boilerplate-mochachai-9cb7.onrender.com'; // Your URL here
+Browser.site = 'https://boilerplate-mochachai-9cb7.onrender.com'; // your deployed app
 const browser = new Browser();
 
 suite('Functional Tests with Zombie.js', function () {
   this.timeout(5000);
 
-suiteSetup(function(done) {
+  suiteSetup(function(done) {
     browser.visit('/', done);
   });
 
   suite('Headless browser', function () {
-    test('should have a working "site" property', function() {
+    test('should have a working "site" property', function () {
       assert.isNotNull(browser.site);
     });
   });
-})
 
   suite('"Famous Italian Explorers" form', function () {
-    // #5
+
+    // ✅ #5 — Submit Colombo
     test('Submit the surname "Colombo" in the HTML form', function (done) {
-  browser.fill('surname', 'Polo').then(() => {   // ← WRONG: should be 'Colombo'
-    browser.pressButton('submit', () => {
-      browser.assert.success();
-      browser.assert.text('span#name', 'Marco');
-      browser.assert.text('span#surname', 'Polo');
-      browser.assert.elements('span#dates', 1);
-      done();
+      browser.visit('/', function () {
+        browser.fill('surname', 'Colombo').then(() => {
+          browser.pressButton('submit', function () {
+            browser.assert.success(); // HTTP 200
+            browser.assert.text('span#name', 'Cristoforo');
+            browser.assert.text('span#surname', 'Colombo');
+            browser.assert.elements('span#dates', 1);
+            done();
+          });
+        });
+      });
     });
-  });
-});
-  })
-    // #6
-   test('Submit the surname "Colombo" in the HTML form', function (done) {
-  browser.fill('surname', 'Colombo').then(() => {
-    browser.pressButton('submit', function () {
-      browser.assert.success(); // HTTP 200
-      browser.assert.text('span#name', 'Cristoforo');
-      browser.assert.text('span#surname', 'Colombo');
-      browser.assert.elements('span#dates', 1);
-      done();
+
+    // ✅ #6 — Submit da Verrazzano
+    test('Submit the surname "da Verrazzano" in the HTML form', function (done) {
+      browser.visit('/', function () {
+        browser.fill('surname', 'da Verrazzano').then(() => {
+          browser.pressButton('submit', function () {
+            browser.assert.success(); // HTTP 200
+            browser.assert.text('span#name', 'Giovanni');
+            browser.assert.text('span#surname', 'da Verrazzano');
+            browser.assert.elements('span#dates', 1);
+            done();
+          });
+        });
+      });
     });
+
   });
 });
