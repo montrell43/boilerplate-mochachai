@@ -100,15 +100,14 @@ suiteSetup(function(done) {
 });
   })
     // #6
-    test('Submit the surname "da Verrazzano" in the HTML form', function (done) {
-  browser.fill('surname', 'da Verrazzano').then(() => {
-    browser.pressButton('submit', () => {
-      browser.assert.success();
-      browser.assert.text('span#name', 'Giovanni');
-      browser.assert.text('span#surname', 'da Verrazzano');
+   test('Submit the surname "Colombo" in the HTML form', function (done) {
+  browser.fill('surname', 'Colombo').then(() => {
+    browser.pressButton('submit', function () {
+      browser.assert.success(); // HTTP 200
+      browser.assert.text('span#name', 'Cristoforo');
+      browser.assert.text('span#surname', 'Colombo');
       browser.assert.elements('span#dates', 1);
       done();
     });
   });
 });
-
